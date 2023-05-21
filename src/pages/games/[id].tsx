@@ -31,7 +31,7 @@ async function publishPost(id: string): Promise<void> {
 }
 
 async function deletePost(id: string): Promise<void> {
-  await fetch(`/api/post/${id}`, {
+  await fetch(`/api/gameWorkspace/${id}`, {
     method: "DELETE",
   })
   Router.push("/")
