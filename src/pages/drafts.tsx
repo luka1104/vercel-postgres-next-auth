@@ -2,14 +2,16 @@
 
 import React from "react"
 import { GetServerSideProps } from "next"
-import { useSession, getSession } from "next-auth/react"
+import { useSession } from "next-auth/react"
+import { getServerSession } from "next-auth/next"
 import Layout from "components/Layout"
 import GameWorkspace from "components/GameWorkspace"
 import prisma from "lib/prisma"
 import { GameWorkspaceProps } from "types"
+import { options } from "pages/api/auth/[...nextauth]"
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-  const session = await getSession({ req })
+  const session = await getServerSession(req, res, options)
   if (!session) {
     res.statusCode = 403
     return { props: { drafts: [] } }
@@ -22,7 +24,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     },
     include: {
       author: {
-        select: { name: true },
+        select: { name: true, email: true },
       },
     },
   })
