@@ -2,10 +2,10 @@ import React from "react"
 import { GetServerSideProps } from "next"
 import ReactMarkdown from "react-markdown"
 import Layout from "components/Layout"
-import { PostProps } from "components/Post"
+import { GameWorkspaceProps } from "types"
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const post = {
+  const gameWorkspace = {
     id: "1",
     title: "Prisma is the perfect ORM for Next.js",
     content: "[Prisma](https://github.com/prisma/prisma) and Next.js go _great_ together!",
@@ -16,11 +16,11 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     },
   }
   return {
-    props: post,
+    props: gameWorkspace,
   }
 }
 
-const Post: React.FC<PostProps> = (props) => {
+const GameWorkspace: React.FC<GameWorkspaceProps> = (props) => {
   let title = props.title
   if (!props.published) {
     title = `${title} (Draft)`
@@ -58,4 +58,4 @@ const Post: React.FC<PostProps> = (props) => {
   )
 }
 
-export default Post
+export default GameWorkspace
