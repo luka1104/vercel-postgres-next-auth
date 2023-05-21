@@ -3,6 +3,7 @@ import { GetStaticProps } from "next"
 import Layout from "components/Layout"
 import Post, { PostProps } from "components/Post"
 import prisma from "lib/prisma"
+import { GameWorkspaceProps } from "types"
 
 export const getStaticProps: GetStaticProps = async () => {
   const feed = await prisma.gameWorkspace.findMany({
@@ -20,7 +21,7 @@ export const getStaticProps: GetStaticProps = async () => {
 }
 
 type Props = {
-  feed: PostProps[]
+  feed: GameWorkspaceProps[]
 }
 
 const Blog: React.FC<Props> = (props) => {
