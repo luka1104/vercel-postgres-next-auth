@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
+    "postinstall": "prisma generate",
     "dev": "next",
     "build": "next build",
     "start": "next start"
