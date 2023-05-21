@@ -1,7 +1,7 @@
 import React from "react"
 import { GetStaticProps } from "next"
 import Layout from "components/Layout"
-import Post, { PostProps } from "components/Post"
+import GameWorkspace from "components/GameWorkspace"
 import prisma from "lib/prisma"
 import { GameWorkspaceProps } from "types"
 
@@ -30,9 +30,9 @@ const Blog: React.FC<Props> = (props) => {
       <div className="page">
         <h1>Public Feed</h1>
         <main>
-          {props.feed.map((post) => (
-            <div key={post.id} className="post">
-              <Post post={post} />
+          {props.feed.map((gameWorkspace) => (
+            <div key={gameWorkspace.id} className="post">
+              <GameWorkspace gameWorkspace={gameWorkspace} />
             </div>
           ))}
         </main>
