@@ -3,7 +3,7 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import GitHubProvider from "next-auth/providers/github"
 import prisma from "lib/prisma"
 
-const options = {
+export const options = {
   providers: [
     GitHubProvider({
       clientId: process.env.GITHUB_ID,
