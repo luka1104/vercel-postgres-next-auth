@@ -4,8 +4,9 @@ import React from "react"
 import { GetServerSideProps } from "next"
 import { useSession, getSession } from "next-auth/react"
 import Layout from "components/Layout"
-import Post, { PostProps } from "components/Post"
+import GameWorkspace from "components/GameWorkspace"
 import prisma from "lib/prisma"
+import { GameWorkspaceProps } from "types"
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getSession({ req })
@@ -14,7 +15,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     return { props: { drafts: [] } }
   }
 
-  const drafts = await prisma.post.findMany({
+  const drafts = await prisma.gameWorkspace.findMany({
     where: {
       author: { email: session.user.email },
       published: false,
@@ -31,7 +32,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
 }
 
 type Props = {
-  drafts: PostProps[]
+  drafts: GameWorkspaceProps[]
 }
 
 const Drafts: React.FC<Props> = (props) => {
@@ -51,9 +52,9 @@ const Drafts: React.FC<Props> = (props) => {
       <div className="page">
         <h1>My Drafts</h1>
         <main>
-          {props.drafts.map((post) => (
-            <div key={post.id} className="post">
-              <Post post={post} />
+          {props.drafts.map((gameWorkspace) => (
+            <div key={gameWorkspace.id} className="post">
+              <GameWorkspace gameWorkspace={gameWorkspace} />
             </div>
           ))}
         </main>
