@@ -6,7 +6,7 @@ import { GameWorkspaceProps } from "types"
 const GameWorkspace: React.FC<{ gameWorkspace: GameWorkspaceProps }> = ({ gameWorkspace }) => {
   const authorName = gameWorkspace.author ? gameWorkspace.author.name : "Unknown author"
   return (
-    <div onClick={() => Router.push("/p/[id]", `/p/${gameWorkspace.id}`)}>
+    <div onClick={() => Router.push("/games/[id]", `/games/${gameWorkspace.id}`)}>
       <h2>{gameWorkspace.title}</h2>
       <small>By {authorName}</small>
       <ReactMarkdown children={gameWorkspace.content} />
