@@ -1,11 +1,11 @@
 import React from "react"
-import { GetServerSideProps } from "next"
+import { GetStaticProps } from "next"
 import Layout from "components/Layout"
 import GameWorkspace from "components/GameWorkspace"
 import prisma from "lib/prisma"
 import { GameWorkspaceProps } from "types"
 
-export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+export const getStaticProps: GetStaticProps = async () => {
   const feed = await prisma.gameWorkspace.findMany({
     where: { published: true },
     include: {
@@ -16,7 +16,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   })
   return {
     props: { feed },
-    // revalidate: 10,
+    revalidate: 10,
   }
 }
 
