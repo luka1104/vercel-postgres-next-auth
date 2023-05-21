@@ -1,22 +1,22 @@
 import React from "react"
-import { GetStaticProps } from "next"
+import { GetServerSideProps } from "next"
 import Layout from "components/Layout"
 import GameWorkspace from "components/GameWorkspace"
 import prisma from "lib/prisma"
 import { GameWorkspaceProps } from "types"
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const feed = await prisma.gameWorkspace.findMany({
     where: { published: true },
     include: {
       author: {
-        select: { name: true },
+        select: { name: true, email: true },
       },
     },
   })
   return {
     props: { feed },
-    revalidate: 10,
+    // revalidate: 10,
   }
 }
 
@@ -24,7 +24,7 @@ type Props = {
   feed: GameWorkspaceProps[]
 }
 
-const Blog: React.FC<Props> = (props) => {
+const Index: React.FC<Props> = (props) => {
   return (
     <Layout>
       <div className="page">
@@ -55,4 +55,4 @@ const Blog: React.FC<Props> = (props) => {
   )
 }
 
-export default Blog
+export default Index
